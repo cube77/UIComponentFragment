@@ -2,6 +2,7 @@ package de.fetim.myfirstandroidapp;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
@@ -12,6 +13,7 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.ImageView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -39,9 +41,15 @@ public class MainActivity extends AppCompatActivity {
                 Intent i = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                 startActivityForResult(i, 0);
             }
-
         });
+    }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == RESULT_OK) {
+            Bitmap photo = (Bitmap)data.getExtras().get("data");
+            ((ImageView)findViewById(R.id.imageView)).setImageBitmap(photo);
+        }
     }
 
     @Override
