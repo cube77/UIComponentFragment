@@ -33,22 +33,26 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
+        //static final int REQUEST_IMAGE_CAPTURE = 1;
 
         ((Button)findViewById(R.id.button)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
                 Intent i = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                startActivityForResult(i, 0);
+                startActivityForResult(i, 1);
             }
         });
     }
 
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == RESULT_OK) {
-            Bitmap photo = (Bitmap)data.getExtras().get("data");
-            ((ImageView)findViewById(R.id.imageView)).setImageBitmap(photo);
+            //Bitmap photo = (Bitmap)data.getExtras().get("data");
+            //((ImageView)findViewById(R.id.imageView)).setImageBitmap(photo);
+            Bundle extras = data.getExtras();
+            Bitmap imageBitmap = (Bitmap) extras.get("data");
+            ((ImageView)findViewById(R.id.imageView)).setImageBitmap(imageBitmap);
         }
     }
 
